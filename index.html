@@ -1,0 +1,129 @@
+Jasne, dodamy animacje do slotów! Zmodyfikowałem kod HTML, CSS i JavaScript, aby dodać efekt obracania się slotów podczas losowania. Oto zaktualizowany kod:
+
+```html
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maszyna Slotowa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(to bottom, #6dd5ed, #2193b0);
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        h1 {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        #slot-machine {
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+        }
+        .slot {
+            width: 100px;
+            height: 100px;
+            border: 3px solid #fff;
+            margin: 0 10px;
+            font-size: 2.5em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            overflow: hidden; /* Ukrywa zawartość poza granicami slotu */
+        }
+        .slot.spinning {
+            animation: spin 0.5s ease-in-out infinite; /* Animacja obracania */
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1.5em;
+            cursor: pointer;
+            background-color: #fff;
+            color: #2193b0;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #ddd;
+        }
+        #wynik {
+            font-size: 1.5em;
+            margin-top: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        @keyframes spin {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100px); } /* Zmień wartość na wysokość symbolu */
+        }
+    </style>
+</head>
+<body>
+    <h1>Maszyna Slotowa</h1>
+    <div id="slot-machine">
+        <div class="slot" id="slot1">🍒</div>
+        <div class="slot" id="slot2">🍒</div>
+        <div class="slot" id="slot3">🍒</div>
+    </div>
+    <button onclick="losuj()">Losuj</button>
+    <div id="wynik"></div>
+
+    <script>
+        function losuj() {
+            const symbole = ['🍒', '🍋', '🍊', '🍉', '⭐', '🍀'];
+            const slotElements = [document.getElementById("slot1"), document.getElementById("slot2"), document.getElementById("slot3")];
+
+            // Dodaj klasę "spinning" do slotów
+            slotElements.forEach(slot => {
+                slot.classList.add("spinning");
+            });
+
+            // Losowanie z opóźnieniem, aby animacja się skończyła
+            setTimeout(() => {
+                const slot1 = symbole[Math.floor(Math.random() * symbole.length)];
+                const slot2 = symbole[Math.floor(Math.random() * symbole.length)];
+                const slot3 = symbole[Math.floor(Math.random() * symbole.length)];
+
+                document.getElementById("slot1").innerText = slot1;
+                document.getElementById("slot2").innerText = slot2;
+                document.getElementById("slot3").innerText = slot3;
+
+                // Usuń klasę "spinning" po zakończeniu animacji
+                slotElements.forEach(slot => {
+                    slot.classList.remove("spinning");
+                });
+
+                if (slot1 === slot2 && slot2 === slot3) {
+                    document.getElementById("wynik").innerText = "Gratulacje! Wygrałeś!";
+                } else {
+                    document.getElementById("wynik").innerText = "Spróbuj ponownie!";
+                }
+            }, 500); // Czas trwania animacji (w milisekundach)
+        }
+    </script>
+</body>
+</html>
+```
+
+**Co się zmieniło:**
+
+*   **Animacja CSS:**
+    *   Dodano klasę `.spinning` do slotów, która uruchamia animację obracania.
+    *   Animacja `spin` przesuwa symbole w górę, tworząc efekt obracania.
+*   **JavaScript:**
+    *   Przed losowaniem dodajemy klasę `spinning` do slotów, aby uruchomić animację.
+    *   Używamy `setTimeout` z opóźnieniem (500 ms, czyli 0.5 sekundy) - czas trwania animacji.  Po tym czasie symbole są losowane i usuwamy klasę `spinning`, zatrzymując animację.
+
+Teraz sloty będą się obracać podczas losowania! Pamiętaj, że możesz dostosować czas trwania animacji (w `setTimeout` i `@keyframes`) oraz styl animacji, aby uzyskać pożądany efekt. Daj znać, jeśli chcesz coś jeszcze zmienić! 🎰
