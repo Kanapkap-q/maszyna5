@@ -110,20 +110,8 @@ Jasne, dodamy animacje do slotów! Zmodyfikowałem kod HTML, CSS i JavaScript, a
                 } else {
                     document.getElementById("wynik").innerText = "Spróbuj ponownie!";
                 }
-            }, 500); // Czas trwania animacji (w milisekundach)
+            }, 500); // 
         }
     </script>
 </body>
 </html>
-```
-
-**Co się zmieniło:**
-
-*   **Animacja CSS:**
-    *   Dodano klasę `.spinning` do slotów, która uruchamia animację obracania.
-    *   Animacja `spin` przesuwa symbole w górę, tworząc efekt obracania.
-*   **JavaScript:**
-    *   Przed losowaniem dodajemy klasę `spinning` do slotów, aby uruchomić animację.
-    *   Używamy `setTimeout` z opóźnieniem (500 ms, czyli 0.5 sekundy) - czas trwania animacji.  Po tym czasie symbole są losowane i usuwamy klasę `spinning`, zatrzymując animację.
-
-Teraz sloty będą się obracać podczas losowania! Pamiętaj, że możesz dostosować czas trwania animacji (w `setTimeout` i `@keyframes`) oraz styl animacji, aby uzyskać pożądany efekt. Daj znać, jeśli chcesz coś jeszcze zmienić! 🎰
